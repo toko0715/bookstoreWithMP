@@ -28,6 +28,16 @@ FROM php:8.5-apache AS app
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV APP_ENV=production
+ENV APP_DEBUG=false
+ENV DB_CONNECTION=sqlite
+ENV DB_DATABASE=/var/www/html/storage/database.sqlite
+ENV SESSION_DRIVER=file
+ENV CACHE_STORE=file
+ENV QUEUE_CONNECTION=sync
+ENV LOG_CHANNEL=stack
+ENV LOG_LEVEL=info
+ENV FILESYSTEM_DISK=local
 
 WORKDIR /var/www/html
 
