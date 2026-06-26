@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 | Catálogo
 |--------------------------------------------------------------------------
 */
+Route::get('/up', fn () => response()->noContent())->name('health');
+
 Route::get('/', [CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/libros/{book}', [CatalogController::class, 'show'])->name('catalog.show');
 
