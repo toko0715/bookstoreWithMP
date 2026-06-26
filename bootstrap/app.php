@@ -10,6 +10,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Render (y otros PaaS) terminan TLS en un proxy: confiamos en sus
+        // cabeceras X-Forwarded-* para detectar correctamente HTTPS y el host.
+        $middleware->trustProxies(at: '*');
+
         // Mercado Pago posts server-to-server, so its webhook is exempt from CSRF.
         $middleware->validateCsrfTokens(except: [
             'webhooks/*',

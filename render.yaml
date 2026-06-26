@@ -1,7 +1,55 @@
 services:
   - type: web
     name: libreria-online
-    env: docker
+    runtime: docker
     plan: free
+    dockerfilePath: ./Dockerfile
     autoDeploy: true
     healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: "Librería Online"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # Déjalo vacío para que el contenedor genere una clave efímera,
+      # o pega el resultado de:  php artisan key:generate --show
+      - key: APP_KEY
+        sync: false
+      - key: APP_LOCALE
+        value: es
+      - key: APP_FALLBACK_LOCALE
+        value: en
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: info
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /var/www/html/storage/database.sqlite
+      - key: SESSION_DRIVER
+        value: file
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: STORE_CURRENCY
+        value: PEN
+      - key: STORE_CURRENCY_SYMBOL
+        value: "S/"
+      - key: STORE_LOCALE
+        value: es_PE
+      - key: MP_CURRENCY
+        value: PEN
+      # Secretos: configúralos en el panel de Render (o déjalos vacíos para
+      # usar el pago simulado / portadas de respaldo).
+      - key: MP_ACCESS_TOKEN
+        sync: false
+      - key: MP_PUBLIC_KEY
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false
