@@ -24,7 +24,7 @@ RUN composer install \
     --optimize-autoloader \
     --no-scripts
 
-FROM php:8.2-apache AS app
+FROM php:8.5-apache AS app
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -38,8 +38,8 @@ RUN apt-get update \
         libcurl4-openssl-dev \
         libicu-dev \
         libonig-dev \
-        libpq-dev \
         libxml2-dev \
+        libsqlite3-dev \
         libzip-dev \
     && docker-php-ext-install \
         bcmath \
@@ -47,9 +47,9 @@ RUN apt-get update \
         intl \
         mbstring \
         opcache \
-        pdo_mysql \
-        pdo_pgsql \
+        pdo_sqlite \
         xml \
+        sqlite3 \
         zip \
     && a2enmod rewrite \
     && echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
