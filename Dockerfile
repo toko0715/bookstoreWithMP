@@ -35,19 +35,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
         unzip \
-        libicu-dev \
         libonig-dev \
-        libxml2-dev \
         libsqlite3-dev \
-        libzip-dev \
     && docker-php-ext-install \
-        bcmath \
-        intl \
         mbstring \
-        opcache \
         pdo_sqlite \
-        xml \
-        zip \
     && a2enmod rewrite \
     && echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
     && a2enconf servername \
