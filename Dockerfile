@@ -49,7 +49,6 @@ RUN apt-get update \
         opcache \
         pdo_sqlite \
         xml \
-        sqlite3 \
         zip \
     && a2enmod rewrite \
     && echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
